@@ -1,17 +1,21 @@
 package hu.wv.webshopbackend.user;
 
 import hu.wv.webshopbackend.exception.UserNotFoundException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private static PasswordEncoder passwordEncoder;
@@ -65,5 +69,19 @@ public class UserService {
         } catch (final UserNotFoundException e) {
             return null;
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByEmail(email);
+        List<String> roles = new ArrayList<>();
+        roles.add("USER");
+        UserDetails userDetails =
+                org.springframework.security.core.userdetails.User.builder()
+                        .username(user.get().getEmail())
+                        .password(user.get().getPassword())
+                        .roles(roles.toArray(new String[0]))
+                        .build();
+        return userDetails;
     }
 }
