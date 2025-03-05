@@ -1,5 +1,8 @@
 package hu.wv.webshopbackend.config;
 
+import com.github.javafaker.Faker;
+import hu.wv.webshopbackend.products.Product;
+import hu.wv.webshopbackend.products.ProductRepository;
 import hu.wv.webshopbackend.user.User;
 import hu.wv.webshopbackend.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -13,10 +16,12 @@ import java.util.List;
 public class DataLoader  implements CommandLineRunner {
 
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
     private static PasswordEncoder passwordEncoder;
-    public DataLoader(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataLoader(UserRepository userRepository, PasswordEncoder passwordEncoder, ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+                this.productRepository = productRepository;
 
 
     }
@@ -25,11 +30,16 @@ public class DataLoader  implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
          userRepository.deleteAll();
+         productRepository.deleteAll();
+
          userRepository.resetSequence();
-        User adminUser = buildAdminUser();
+         productRepository.resetSequence();
+         User adminUser = buildAdminUser();
         List<User> users = buildUsers();
+        List<Product> products = buildProducts();
         userRepository.save(adminUser);
         userRepository.saveAll(users);
+        productRepository.saveAll(products);
     }
 
     private static User buildAdminUser() {
@@ -42,6 +52,21 @@ public class DataLoader  implements CommandLineRunner {
               .email("adm@adm.hu").build();
 
 
+    }
+    private static List<Product> buildProducts() {
+        final List<Product> products = new ArrayList<>();
+        Faker faker = new Faker();
+        for (int i = 0; i < 10; i++) {
+            String productName = faker.book().title();
+            String productDescription = faker.lorem().paragraph(10);
+            int productPrice = faker.number().numberBetween(1, 100);
+            products.add(Product.builder()
+                    .productName(productName)
+                    .price(productPrice)
+                    .description(productDescription)
+        .build());
+        }
+        return products;
     }
 
     private static List<User> buildUsers() {
