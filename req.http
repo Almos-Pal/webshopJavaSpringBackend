@@ -1,3 +1,7 @@
+
+
+
+###
 ### GET request to example server
 GET http://localhost:8080/users
 ###
@@ -8,7 +12,32 @@ GET http://localhost:8080/users/user/asd
 
 
 ###
-GET http://localhost:8080/users/1
+GET http://localhost:8080/users/10
 ###
 
 
+###
+DELETE http://localhost:8080/users/1
+###
+
+###
+PATCH http://localhost:8080/users/1
+Content-Type: application/json
+
+{
+  "admin": true
+}
+###
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "email": "asda@gmail.com",
+  "password": "P@ssw0rd",
+  "username": "csodajoUser",
+  "cartItems": [],
+  "isAdmin": true
+}
+###

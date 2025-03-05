@@ -31,7 +31,7 @@ public class DataLoader  implements CommandLineRunner {
 
       return User.builder()
               .username("admin")
-              .isAdmin(false)
+              .admin(false)
               .password(passwordEncoder.encode("Password"))
               .email("asd").build();
 

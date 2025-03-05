@@ -3,6 +3,7 @@ package hu.wv.webshopbackend.user;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -31,5 +32,16 @@ public class UserController {
     @PostMapping()
     public User createUser(@RequestBody final User user) {
         return  userService.createUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public List<User> deleteUser(@PathVariable final Long id) {
+        return userService.deleteById(id);
+    }
+
+
+    @PatchMapping("/{id}")
+    public User updateUser(@PathVariable final Long id, @RequestBody final Map<String,Object> fields) {
+        return userService.updateUser(id,fields);
     }
 }

@@ -31,8 +31,8 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @Column
-    private  boolean isAdmin;
+    @Column()
+    private  boolean admin;
 
 
     @OneToMany
