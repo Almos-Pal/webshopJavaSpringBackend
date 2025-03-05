@@ -16,6 +16,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiO
   "price": 100,
   "productName": "Stack overflow answer"
 
+
 }
 
 ###

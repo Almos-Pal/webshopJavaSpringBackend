@@ -26,7 +26,9 @@ public class CartItems {
     @ManyToOne
     private User user;
 
-    @OneToOne(mappedBy = "cartItems" )
+    @JoinColumn(name = "cart_items_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL )
+
     private  Product product;
 
 

@@ -34,8 +34,5 @@ public class Product {
     @Lob
     private byte[] picture;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_items_id", referencedColumnName = "id")
-    private CartItems cartItems;
 
 }
