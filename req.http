@@ -15,11 +15,27 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiO
   "description": "ou can achieve this using a small modification to the syntax you are using, by adding the default value within ${}, right after the",
   "price": 100,
   "productName": "Stack overflow answer"
+
 }
 
 ###
 
+###
+DELETE http://localhost:8080/product/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiOiJhZG1AYWRtLmh1IiwiZXhwIjoxOTU3MTgwNDc3fQ.R-WsnXpnV3nZPcifigWa6oCutoMAMSPCsIkVpUPewhQ
 
+###
+
+###
+PATCH http://localhost:8080/product/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiOiJhZG1AYWRtLmh1IiwiZXhwIjoxOTU3MTgwNDc3fQ.R-WsnXpnV3nZPcifigWa6oCutoMAMSPCsIkVpUPewhQ
+
+
+{
+  "price": 120
+}
+###
 
 ###
 ### GET request to example server
@@ -43,6 +59,8 @@ DELETE http://localhost:8080/users/1
 ###
 PATCH http://localhost:8080/users/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiOiJhZG1AYWRtLmh1IiwiZXhwIjoxOTU3MTgwNDc3fQ.R-WsnXpnV3nZPcifigWa6oCutoMAMSPCsIkVpUPewhQ
+
 
 {
   "admin": true

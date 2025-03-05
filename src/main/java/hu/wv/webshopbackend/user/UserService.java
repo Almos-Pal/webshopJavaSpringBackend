@@ -46,15 +46,17 @@ public class UserService implements UserDetailsService {
     }
 
     public User updateUser(Long id, Map<String, Object> fields) {
-        Optional<User> existingProduct = userRepository.findById(id);
+        Optional<User> existingUser = userRepository.findById(id);
 
-        if (existingProduct.isPresent()) {
+        if (existingUser.isPresent()) {
             fields.forEach((key, value) -> {
                 Field field = ReflectionUtils.findField(User.class, key);
+                assert field != null;
+
                 field.setAccessible(true);
-                ReflectionUtils.setField(field, existingProduct.get(), value);
+                ReflectionUtils.setField(field, existingUser.get(), value);
             });
-            return userRepository.save(existingProduct.get());
+            return userRepository.save(existingUser.get());
         }
         return null;
     }
