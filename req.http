@@ -1,5 +1,14 @@
 ### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+GET http://localhost:8080/users
+###
 
 ###
+GET http://localhost:8080/users/user/asd
+###
+
+
+###
+GET http://localhost:8080/users/1
+###
+
+
