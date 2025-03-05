@@ -1,9 +1,6 @@
 package hu.wv.webshopbackend.products;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,9 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product getProduct( @PathVariable final Long id ) {
         return  productService.getProduct(id);
+    }
+    @PostMapping()
+    public Product addProduct( @RequestBody final Product product ) {
+        return  productService.createProduct(product);
     }
 }

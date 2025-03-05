@@ -1,3 +1,23 @@
+GET http://localhost:8080/product
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiOiJhZG1AYWRtLmh1IiwiZXhwIjoxOTU3MTgwNDc3fQ.R-WsnXpnV3nZPcifigWa6oCutoMAMSPCsIkVpUPewhQ
+Accept: application/json
+###
+GET http://localhost:8080/product/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiOiJhZG1AYWRtLmh1IiwiZXhwIjoxOTU3MTgwNDc3fQ.R-WsnXpnV3nZPcifigWa6oCutoMAMSPCsIkVpUPewhQ
+Accept: application/json
+
+###
+POST http://localhost:8080/product
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiOiJhZG1AYWRtLmh1IiwiZXhwIjoxOTU3MTgwNDc3fQ.R-WsnXpnV3nZPcifigWa6oCutoMAMSPCsIkVpUPewhQ
+
+{
+  "description": "ou can achieve this using a small modification to the syntax you are using, by adding the default value within ${}, right after the",
+  "price": 100,
+  "productName": "Stack overflow answer"
+}
+
+###
 
 
 
@@ -52,3 +72,6 @@ Content-Type: application/json
 }
 
 ###
+
+
+

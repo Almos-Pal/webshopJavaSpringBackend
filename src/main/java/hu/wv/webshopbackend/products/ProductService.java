@@ -19,4 +19,7 @@ public class ProductService {
     public Product getProduct( final Long id )  {
         return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
     }
+    public Product createProduct( final Product product ) {
+        return productRepository.save( product );
+    }
 }
