@@ -35,8 +35,7 @@ public class User {
     private  boolean admin;
 
 
-    @OneToMany
-    private Set<CartItems> cartItems;
+
 
 
 }
