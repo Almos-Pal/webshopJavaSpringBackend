@@ -1,5 +1,7 @@
 package hu.wv.webshopbackend.user;
 
+import hu.wv.webshopbackend.cartItems.CartItems;
+import hu.wv.webshopbackend.cartItems.CartItemsRepository;
 import hu.wv.webshopbackend.exception.UserNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,10 +20,12 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final CartItemsRepository cartItemsRepository;
     private static PasswordEncoder passwordEncoder;
 
-    public UserService(final UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(final UserRepository userRepository, CartItemsRepository cartItemsRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.cartItemsRepository = cartItemsRepository;
         this.passwordEncoder = passwordEncoder;
 
     }
@@ -40,6 +44,10 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> deleteById(final Long id) {
+
+
+        Optional<List<CartItems>> existingCartItems =  cartItemsRepository.findAllByUserId(id);
+        existingCartItems.ifPresent(cartItemsRepository::deleteAll);
 
         userRepository.deleteById(id);
         return userRepository.findAll();

@@ -1,5 +1,7 @@
 package hu.wv.webshopbackend.products;
 
+import hu.wv.webshopbackend.cartItems.CartItems;
+import hu.wv.webshopbackend.cartItems.CartItemsRepository;
 import hu.wv.webshopbackend.exception.ProductNotFoundException;
 import hu.wv.webshopbackend.user.User;
 import org.springframework.stereotype.Service;
@@ -13,8 +15,10 @@ import java.util.Optional;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-    public ProductService( final ProductRepository productRepository ) {
+    private final CartItemsRepository cartItemsRepository;
+    public ProductService(final ProductRepository productRepository, CartItemsRepository cartItemsRepository) {
         this.productRepository = productRepository;
+        this.cartItemsRepository = cartItemsRepository;
     }
 
     public List<Product> getProducts() {
@@ -44,6 +48,11 @@ public class ProductService {
         return null;
     }
     public List<Product> deleteProduct(final Long id ) {
+
+
+       Optional<List<CartItems>> existingCartItems =  cartItemsRepository.findAllByProductId(id);
+        existingCartItems.ifPresent(cartItemsRepository::deleteAll);
+
         productRepository.deleteById(id);
         return productRepository.findAll();
     }
