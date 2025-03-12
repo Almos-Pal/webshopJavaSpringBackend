@@ -2,21 +2,15 @@ package hu.wv.webshopbackend.user;
 
 
 public class LoginRes {
-    private String email;
     private String token;
+    private User user;
 
-    public LoginRes(String email, String token) {
-        this.email = email;
+    public LoginRes( String token, User user) {
         this.token = token;
+        this.user = user;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getToken() {
         return token;
@@ -24,5 +18,14 @@ public class LoginRes {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

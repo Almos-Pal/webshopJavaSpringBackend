@@ -1,7 +1,6 @@
 package hu.wv.webshopbackend.cartItems;
 
 
-import hu.wv.webshopbackend.products.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +17,8 @@ public class CartItemsController {
     }
 
     @GetMapping("/{id}")
-    public CartItems getCartItems(@PathVariable Long id) {
-        return cartItemsService.getById(id);
+    public List<CartItems> getCartItems(@PathVariable Long id) {
+        return cartItemsService.getAllByUserId(id);
     }
     @GetMapping()
     public List<CartItems> getAllCartItems() {

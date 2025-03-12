@@ -9,12 +9,9 @@ import hu.wv.webshopbackend.products.ProductService;
 import hu.wv.webshopbackend.user.ErrorRes;
 import hu.wv.webshopbackend.user.User;
 import hu.wv.webshopbackend.user.UserRepository;
-import hu.wv.webshopbackend.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +28,8 @@ public class CartItemsService {
         this.productRepository = productRepository;
     }
 
-    public CartItems getById(final Long id) {
-        return cartItemsRepository.findById(id).orElseThrow(() -> (new CartItemsNotFoundException("Cart Item not found")));
+    public List<CartItems> getAllByUserId(final Long id) {
+        return cartItemsRepository.findAllByUserId(id).orElseThrow(() -> (new CartItemsNotFoundException("Cart Item not found")));
     }
 
     public List<CartItems> findAll() {

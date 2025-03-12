@@ -1,6 +1,6 @@
 @token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmh1IiwiZW1haWwiOiJhZG1AYWRtLmh1IiwiZXhwIjoxOTU3MTgwNDc3fQ.R-WsnXpnV3nZPcifigWa6oCutoMAMSPCsIkVpUPewhQ
 
-
+###
 POST http://localhost:8080/cart/5
 Content-Type: application/json
 Authorization: Bearer  {{token}}
@@ -9,6 +9,12 @@ Authorization: Bearer  {{token}}
   "quantity": 10,
   "itemId": 4
 }
+###
+###
+GET http://localhost:8080/cart/5
+Authorization: Bearer {{token}}
+Accept: application/json
+###
 
 ###
 
