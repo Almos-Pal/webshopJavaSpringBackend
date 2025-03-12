@@ -40,9 +40,17 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PostMapping()
-    public User createUser(@RequestBody final User user) {
-        return  userService.createUser(user);
+    @PostMapping("/register")
+    public ResponseEntity<ErrorRes> createUser(@RequestBody final User user) {
+        if(userService.existsByEmail(user.getEmail())) {
+
+
+            ErrorRes errorResponse = new ErrorRes(HttpStatus.CONFLICT,"User with this email already exists.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+        }
+         userService.createUser(user);
+
+        return   ResponseEntity.status(HttpStatus.OK).body(new ErrorRes(HttpStatus.OK,"User created"));
     }
 
     @DeleteMapping("/{id}")
