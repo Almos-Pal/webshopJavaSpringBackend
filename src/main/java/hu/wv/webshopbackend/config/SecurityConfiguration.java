@@ -3,6 +3,7 @@ package hu.wv.webshopbackend.config;
 
 import hu.wv.webshopbackend.auth.JwtAuthorizationFilter;
 import hu.wv.webshopbackend.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,10 +31,14 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    CustomCorsConfiguration customCorsConfiguration;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("users/login").permitAll().anyRequest().authenticated()).addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+                .authorizeHttpRequests(auth -> auth.requestMatchers("users/login").permitAll().anyRequest().authenticated()).addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors(c -> c.configurationSource(customCorsConfiguration));;
         return http.build();
     }
 
